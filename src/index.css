@@ -1,0 +1,205 @@
+@import url("https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  font-family: "Manrope", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff8f4;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 320px;
+  margin: 0;
+  font-family: "Manrope", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: #fff8f4;
+}
+
+.font-display {
+  font-family: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.final-message {
+  font-family: "Manrope", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  text-align: left;
+  font-size: clamp(1rem, 2.8vw, 1.12rem);
+  line-height: 1.85;
+  overflow-wrap: break-word;
+  word-break: normal;
+  hyphens: auto;
+}
+
+.final-message p + p {
+  margin-top: 1rem;
+}
+
+.night-mode {
+  color-scheme: dark;
+  background: #1c1718;
+}
+
+.night-mode .text-stone-800 {
+  color: #fff8f4;
+}
+
+.night-mode .text-stone-700,
+.night-mode .text-stone-600 {
+  color: rgba(255, 248, 244, 0.82);
+}
+
+.night-mode .text-stone-500,
+.night-mode .text-stone-400 {
+  color: rgba(255, 248, 244, 0.62);
+}
+
+.night-mode .bg-stone-800 {
+  background: rgba(255, 248, 244, 0.92);
+  color: #2f2524;
+}
+
+.night-mode [class*="bg-white/"],
+.night-mode [class*="bg-white"] {
+  background-color: rgba(50, 38, 39, 0.68) !important;
+}
+
+.night-mode [class*="border-white/"] {
+  border-color: rgba(255, 248, 244, 0.2) !important;
+}
+
+.night-mode [class*="shadow-"] {
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.34) !important;
+}
+
+.night-mode [class*="bg-gradient-to-br"],
+.night-mode [class*="bg-[linear-gradient"],
+.night-mode [class*="bg-[radial-gradient"] {
+  background-image:
+    radial-gradient(circle at 22% 18%, rgba(244, 114, 182, 0.18), transparent 32%),
+    linear-gradient(145deg, rgba(55, 41, 42, 0.82), rgba(38, 30, 31, 0.74)) !important;
+}
+
+.night-mode button {
+  color: rgba(255, 248, 244, 0.9);
+}
+
+.night-mode img {
+  filter: saturate(0.92) brightness(0.9);
+}
+
+.night-mode .noise-layer {
+  opacity: 0.2;
+  mix-blend-mode: screen;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid rgba(244, 114, 182, 0.7);
+  outline-offset: 4px;
+}
+
+.noise-layer {
+  position: absolute;
+  inset: 0;
+  opacity: 0.16;
+  mix-blend-mode: soft-light;
+  background-image:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.2), rgba(255, 219, 227, 0.14)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.48'/%3E%3C/svg%3E");
+  animation: noise-shift 8s steps(6) infinite;
+}
+
+@keyframes noise-shift {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-1.5%, 1%, 0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media (max-width: 640px) {
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 4.5rem !important;
+    padding-bottom: 4.5rem !important;
+  }
+
+  h1 {
+    font-size: clamp(3.1rem, 18vw, 4.8rem) !important;
+  }
+
+  h2 {
+    font-size: clamp(2.75rem, 14vw, 4rem) !important;
+    line-height: 0.98 !important;
+  }
+
+  p {
+    overflow-wrap: break-word;
+    word-break: normal;
+    hyphens: auto;
+  }
+
+  .final-message {
+    font-size: 0.98rem !important;
+    line-height: 1.78 !important;
+    text-align: left;
+  }
+
+  button {
+    max-width: 100%;
+  }
+
+  [class*="rounded-[2.4rem]"],
+  [class*="rounded-[2rem]"] {
+    border-radius: 1.45rem !important;
+  }
+
+  [class*="text-6xl"] {
+    font-size: 3rem !important;
+  }
+
+  [class*="text-5xl"] {
+    font-size: 2.65rem !important;
+  }
+
+  [class*="text-4xl"] {
+    font-size: 2.2rem !important;
+  }
+
+  .fixed.top-5 {
+    top: 0.75rem !important;
+  }
+}

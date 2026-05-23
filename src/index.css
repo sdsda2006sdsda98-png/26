@@ -17,6 +17,7 @@
 
 html {
   scroll-behavior: smooth;
+  touch-action: pan-y;
 }
 
 body {
@@ -24,6 +25,13 @@ body {
   margin: 0;
   font-family: "Manrope", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #fff8f4;
+  touch-action: pan-y;
+  overscroll-behavior-y: contain;
+}
+
+#root {
+  min-height: 100vh;
+  touch-action: pan-y;
 }
 
 .font-display {
@@ -150,6 +158,13 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
+  html,
+  body,
+  #root {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
   section {
     padding-left: 1rem !important;
     padding-right: 1rem !important;
@@ -182,6 +197,117 @@ a:focus-visible {
     max-width: 100%;
   }
 
+  .hero-section {
+    min-height: auto !important;
+    align-items: flex-start !important;
+    padding-top: 5.75rem !important;
+    padding-bottom: 4rem !important;
+  }
+
+  .hero-section > div {
+    gap: 2.25rem !important;
+  }
+
+  .hero-card {
+    max-width: min(100%, 330px) !important;
+  }
+
+  .hero-card > div:first-child {
+    inset: 0.65rem !important;
+    border-radius: 1.65rem !important;
+  }
+
+  .hero-card > div:nth-child(2) {
+    padding: 0.75rem !important;
+    border-radius: 1.9rem !important;
+  }
+
+  .hero-card > div:nth-child(2) > div {
+    padding: 1.15rem !important;
+    border-radius: 1.35rem !important;
+  }
+
+  .mobile-primary-action,
+  section button {
+    min-height: 3.25rem;
+  }
+
+  .mobile-primary-action {
+    width: 100%;
+    justify-content: center;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+  }
+
+  .floating-heart {
+    right: 0.9rem !important;
+    bottom: calc(0.9rem + env(safe-area-inset-bottom)) !important;
+    width: 2.75rem !important;
+    height: 2.75rem !important;
+  }
+
+  .mobile-gate {
+    align-items: center !important;
+    padding: 1rem !important;
+  }
+
+  .mobile-dialog,
+  .mobile-lightbox {
+    max-height: calc(100dvh - 2rem);
+    overflow-y: auto;
+    padding: 1.25rem !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .mobile-overlay {
+    align-items: center !important;
+    padding: 0.9rem !important;
+  }
+
+  .mobile-lightbox-image {
+    max-height: calc(100dvh - 10rem) !important;
+  }
+
+  .photo-card {
+    aspect-ratio: 3 / 4 !important;
+  }
+
+  .warm-jar-visual {
+    min-height: 300px !important;
+    padding: 1.25rem !important;
+  }
+
+  .warm-jar {
+    width: 11rem !important;
+    height: 14rem !important;
+  }
+
+  .warm-note,
+  .constellation-message {
+    padding: 1.35rem !important;
+  }
+
+  .constellation-panel {
+    padding: 1.25rem !important;
+  }
+
+  .constellation-message {
+    min-height: 210px !important;
+  }
+
+  .final-section {
+    padding-top: 5rem !important;
+    padding-bottom: 6rem !important;
+  }
+
+  [class*="tracking-[0.18em]"],
+  [class*="tracking-[0.2em]"],
+  [class*="tracking-[0.24em]"],
+  [class*="tracking-[0.25em]"],
+  [class*="tracking-[0.28em]"] {
+    letter-spacing: 0.13em !important;
+  }
+
   [class*="rounded-[2.4rem]"],
   [class*="rounded-[2rem]"] {
     border-radius: 1.45rem !important;
@@ -201,5 +327,43 @@ a:focus-visible {
 
   .fixed.top-5 {
     top: 0.75rem !important;
+  }
+
+  .mobile-floating-particle {
+    display: none;
+  }
+
+  .noise-layer {
+    animation: none;
+    opacity: 0.08;
+  }
+
+  .blur-2xl {
+    --tw-blur: blur(22px) !important;
+  }
+
+  .blur-3xl {
+    --tw-blur: blur(34px) !important;
+  }
+
+  .mobile-soft-orb {
+    opacity: 0.24 !important;
+    transform: none !important;
+  }
+
+  .backdrop-blur,
+  .backdrop-blur-xl,
+  .backdrop-blur-2xl {
+    -webkit-backdrop-filter: blur(6px) !important;
+    backdrop-filter: blur(6px) !important;
+  }
+}
+
+@media (hover: none) {
+  .hover\:-translate-y-0\.5:hover,
+  .hover\:-translate-y-1:hover,
+  .hover\:scale-105:hover,
+  .group:hover .group-hover\:scale-105 {
+    transform: none !important;
   }
 }

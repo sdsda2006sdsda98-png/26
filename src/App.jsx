@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion, useScroll, useSpring } from "framer-motion";
+import { AnimatePresence, MotionConfig, motion, useReducedMotion } from "framer-motion";
 import {
   CalendarHeart,
   Gift,
@@ -333,7 +333,7 @@ function ClickSparkles() {
       }, 900);
     };
 
-    window.addEventListener("pointerdown", handlePointerDown);
+    window.addEventListener("pointerdown", handlePointerDown, { passive: true });
     return () => window.removeEventListener("pointerdown", handlePointerDown);
   }, []);
 
@@ -1355,8 +1355,7 @@ function FinalSection() {
 export default function App() {
   const [nightMode, setNightMode] = useState(true);
   const [analyticsConsent, setAnalyticsConsent] = useState(() => getCookieValue(CONSENT_COOKIE));
-  const { scrollYProgress } = useScroll();
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 28, restDelta: 0.001 });
+  const isMobile = useIsMobile();
   const siteUnlocked = analyticsConsent === "yes";
   useConsentAnalytics(analyticsConsent);
 
@@ -1374,40 +1373,39 @@ export default function App() {
       className={`min-h-screen overflow-x-hidden transition-colors duration-700 ${nightMode ? "night-mode text-stone-100" : "text-stone-800"
         }`}
     >
-      <motion.div
-        className="fixed left-0 top-0 z-[60] h-1 origin-left bg-gradient-to-r from-rose-300 via-orange-200 to-amber-200"
-        style={{ scaleX }}
-      />
-      <BackgroundDecor nightMode={nightMode} />
-      <CookieGate
-        consent={analyticsConsent}
-        onAccept={acceptAnalytics}
-        onDecline={declineAnalytics}
-      />
-      {siteUnlocked && (
-        <>
-          <NightToggle nightMode={nightMode} onToggle={() => setNightMode((current) => !current)} />
-          <FloatingHeart />
-          <ClickSparkles />
-          <Hero />
-          <main>
-            <Countdown />
-            <PhotoMemories />
-            <Timeline />
-            <MessageSection />
-            <OpenWhenLetters />
-            <WishGarden />
-            <QuietReasons />
-            <FavoriteThings />
-            <WarmJar />
-            <TinyConstellation />
-            <RandomWish />
-            <FutureLetter />
-            <TimeCapsule />
-            <FinalSection />
-          </main>
-        </>
-      )}
+      <MotionConfig reducedMotion={isMobile ? "always" : "user"}>
+        <div className="fixed left-0 top-0 z-[60] h-1 w-full bg-gradient-to-r from-rose-300 via-orange-200 to-amber-200" />
+        <BackgroundDecor nightMode={nightMode} />
+        <CookieGate
+          consent={analyticsConsent}
+          onAccept={acceptAnalytics}
+          onDecline={declineAnalytics}
+        />
+        {siteUnlocked && (
+          <>
+            <NightToggle nightMode={nightMode} onToggle={() => setNightMode((current) => !current)} />
+            <FloatingHeart />
+            {!isMobile && <ClickSparkles />}
+            <Hero />
+            <main>
+              <Countdown />
+              <PhotoMemories />
+              <Timeline />
+              <MessageSection />
+              <OpenWhenLetters />
+              <WishGarden />
+              <QuietReasons />
+              <FavoriteThings />
+              <WarmJar />
+              <TinyConstellation />
+              <RandomWish />
+              <FutureLetter />
+              <TimeCapsule />
+              <FinalSection />
+            </main>
+          </>
+        )}
+      </MotionConfig>
     </div>
   );
 }

@@ -17,7 +17,6 @@
 
 html {
   scroll-behavior: smooth;
-  touch-action: pan-y;
 }
 
 body {
@@ -25,13 +24,12 @@ body {
   margin: 0;
   font-family: "Manrope", "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   background: #fff8f4;
-  touch-action: pan-y;
-  overscroll-behavior-y: contain;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
 }
 
 #root {
   min-height: 100vh;
-  touch-action: pan-y;
 }
 
 .font-display {
@@ -115,6 +113,7 @@ body {
 button,
 a {
   -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 button:focus-visible,
@@ -158,6 +157,10 @@ a:focus-visible {
 }
 
 @media (max-width: 640px) {
+  html {
+    scroll-behavior: auto;
+  }
+
   html,
   body,
   #root {
@@ -338,24 +341,24 @@ a:focus-visible {
     opacity: 0.08;
   }
 
-  .blur-2xl {
-    --tw-blur: blur(22px) !important;
-  }
-
+  .blur-2xl,
   .blur-3xl {
-    --tw-blur: blur(34px) !important;
+    display: none !important;
   }
 
   .mobile-soft-orb {
-    opacity: 0.24 !important;
-    transform: none !important;
+    display: none !important;
   }
 
   .backdrop-blur,
   .backdrop-blur-xl,
   .backdrop-blur-2xl {
-    -webkit-backdrop-filter: blur(6px) !important;
-    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+
+  [class*="shadow-"] {
+    box-shadow: 0 14px 38px rgba(126, 91, 73, 0.1) !important;
   }
 }
 
